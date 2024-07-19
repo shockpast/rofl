@@ -1,0 +1,17 @@
+name: rofl
+version: '1.0-SNAPSHOT'
+main: me.shockpast.rofl.Rofl
+api-version: '1.21'
+commands:
+  vanish:
+    description: ":)"
+    usage: "/vanish [player]"
+    aliases: [ cloak ]
+    permission: rofl.command.vanish
+    permission-message: "You do not have permission to vanish yourself or others."
+  invsee:
+    description: ":)"
+    usage: "/invsee <player>"
+    aliases: []
+    permission: rofl.command.invsee
+    permission-message: "You do not have permission to view other's player inventory."
