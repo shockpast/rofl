@@ -2,7 +2,6 @@ package me.shockpast.rofl.commands;
 
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -29,7 +28,9 @@ public class Vanish implements CommandExecutor {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage("[/vanish] может быть использован только игроком.");
+                sender.sendMessage(Component.text("Эта команда доступна только для игроков.")
+                        .color(TextColor.color(240, 55, 55)));
+
                 return true;
             }
 
@@ -38,7 +39,10 @@ public class Vanish implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage("%s не существует на сервере.".formatted(args[0]));
+                sender.sendMessage(Component.text(args[0])
+                        .color(TextColor.color(66, 135, 245))
+                        .append(Component.text(" не существует на сервере.")));
+
                 return true;
             }
         }

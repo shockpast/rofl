@@ -8,14 +8,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public class Invsee implements CommandExecutor {
-    private final JavaPlugin plugin;
-
-    public Invsee(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public Invsee() {
     }
 
     @Override

@@ -15,3 +15,9 @@ commands:
     aliases: []
     permission: rofl.command.invsee
     permission-message: "You do not have permission to view other's player inventory."
+  mute:
+    description: ":)"
+    usage: "/mute <player> [duration] [reason]"
+    aliases: []
+    permission: rofl.command.mute
+    permission-message: "You do not have permission to mute other players."

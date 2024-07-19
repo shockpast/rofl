@@ -1,6 +1,7 @@
 package me.shockpast.rofl;
 
 import me.shockpast.rofl.commands.Invsee;
+import me.shockpast.rofl.commands.Mute;
 import me.shockpast.rofl.commands.Vanish;
 import me.shockpast.rofl.listeners.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,7 +16,8 @@ public final class Rofl extends JavaPlugin {
 
         //
         getCommand("vanish").setExecutor(new Vanish(this, data));
-        getCommand("invsee").setExecutor(new Invsee(this));
+        getCommand("invsee").setExecutor(new Invsee());
+        getCommand("mute").setExecutor(new Mute(this, data));
     }
 
     @Override
