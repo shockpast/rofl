@@ -7,16 +7,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class Mute implements CommandExecutor {
+public class Mute implements CommandExecutor, TabExecutor {
     private JavaPlugin plugin;
     private SharedData data;
 
@@ -69,7 +74,7 @@ public class Mute implements CommandExecutor {
                 .append(Component.text(args[1])
                         .color(TextColor.color(130, 255, 115)))
                 .append(Component.text(" (%s)".formatted(reason))
-                        .color(TextColor.color(255, 255, 255))));
+                        .color(TextColor.color(78, 78, 78))));
 
         plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
             public void run() {
@@ -78,5 +83,22 @@ public class Mute implements CommandExecutor {
         }, duration.getSeconds() * 20L);
 
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String line, @NotNull String[] args) {
+        List<String> tab = new ArrayList<>();
+
+        return switch (args.length) {
+            case 1 -> {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    tab.add(player.getName());
+                }
+                yield tab;
+            }
+            case 2 -> Arrays.asList("1s", "1m", "1h");
+            case 3 -> Arrays.asList("Спам", "Флуд", "Плохой");
+            default -> new ArrayList<>();
+        };
     }
 }
