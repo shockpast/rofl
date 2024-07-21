@@ -19,5 +19,19 @@ public final class Rofl extends JavaPlugin {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("mute").setExecutor(new Mute(this, data));
         getCommand("report").setExecutor(new Report(data));
+
+        //
+        this.getLogger().info("""
+         \n
+         /$$$$$$$   /$$$$$$  /$$$$$$$$ /$$     \s
+        | $$__  $$ /$$__  $$| $$_____/| $$     \s
+        | $$  \\ $$| $$  \\ $$| $$      | $$     \s
+        | $$$$$$$/| $$  | $$| $$$$$   | $$     \s
+        | $$__  $$| $$  | $$| $$__/   | $$     \s
+        | $$  \\ $$| $$  | $$| $$      | $$     \s
+        | $$  | $$|  $$$$$$/| $$      | $$$$$$$$
+        |__/  |__/ \\______/ |__/      |________/
+                            is now enabled, thanks.
+        """);
     }
 }

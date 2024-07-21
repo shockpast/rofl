@@ -55,11 +55,18 @@ public class Report implements CommandExecutor, TabExecutor {
                     .stream().filter(entry -> target.getUniqueId().equals(entry.getKey()))
                     .map(Map.Entry::getKey).findFirst().get();
 
-            OfflinePlayer complainer = Bukkit.getOfflinePlayer(uuid);
+            OfflinePlayer oComplainer = Bukkit.getOfflinePlayer(uuid);
             data.reported_players.remove(target.getUniqueId());
 
+            if (oComplainer.isOnline()) {
+                Player pComplainer = Bukkit.getPlayer(uuid);
+                pComplainer.sendMessage(Component.text(player.getName()).color(TextColor.color(66, 135, 245))
+                        .append(Component.text(" закрыл вашу жалобу на ").color(TextColor.color(255, 255, 255))
+                        .append(Component.text(target.getName()).color(TextColor.color(66, 135, 245)))));
+            }
+
             player.sendMessage(Component.text("Вы закрыли жалобу ")
-                    .append(Component.text(complainer.getName()).color(TextColor.color(66, 135, 245)))
+                    .append(Component.text(oComplainer.getName()).color(TextColor.color(66, 135, 245)))
                     .append(Component.text(" на игрока ").color(TextColor.color(255, 255, 255)))
                     .append(Component.text(target.getName()).color(TextColor.color(66, 135, 245))));
 
@@ -67,6 +74,9 @@ public class Report implements CommandExecutor, TabExecutor {
         }
 
         if (args[0].equals("send")) {
+            if (args.length < 3)
+                return false;
+
             Player target = Bukkit.getPlayer(args[1]);
 
             if (target == null) {
