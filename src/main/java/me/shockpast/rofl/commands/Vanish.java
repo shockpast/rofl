@@ -24,7 +24,7 @@ public class Vanish implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String line, @NotNull String[] args) {
-        Player target = null;
+        Player target;
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
@@ -41,7 +41,8 @@ public class Vanish implements CommandExecutor {
             if (target == null) {
                 sender.sendMessage(Component.text(args[0])
                         .color(TextColor.color(66, 135, 245))
-                        .append(Component.text(" не существует на сервере.")));
+                        .append(Component.text(" не существует на сервере.")
+                                .color(TextColor.color(255, 255, 255))));
 
                 return true;
             }

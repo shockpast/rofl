@@ -13,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
@@ -22,8 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Mute implements CommandExecutor, TabExecutor {
-    private JavaPlugin plugin;
-    private SharedData data;
+    private final JavaPlugin plugin;
+    private final SharedData data;
 
     public Mute(JavaPlugin plugin, SharedData data) {
         this.plugin = plugin;
@@ -47,8 +46,8 @@ public class Mute implements CommandExecutor, TabExecutor {
             return true;
         }
 
-        Duration duration = null;
-        String reason = null;
+        Duration duration;
+        String reason;
 
         try {
             duration = Duration.parse("PT%s".formatted(args[1]).toUpperCase());
@@ -76,11 +75,8 @@ public class Mute implements CommandExecutor, TabExecutor {
                 .append(Component.text(" (%s)".formatted(reason))
                         .color(TextColor.color(78, 78, 78))));
 
-        plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
-            public void run() {
-                data.muted_players.remove(target.getUniqueId());
-            }
-        }, duration.getSeconds() * 20L);
+        plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, () ->
+                data.muted_players.remove(target.getUniqueId()), duration.getSeconds() * 20L);
 
         return true;
     }

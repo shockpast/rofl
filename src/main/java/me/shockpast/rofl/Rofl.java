@@ -1,8 +1,7 @@
 package me.shockpast.rofl;
 
-import me.shockpast.rofl.commands.Invsee;
-import me.shockpast.rofl.commands.Mute;
-import me.shockpast.rofl.commands.Vanish;
+import me.shockpast.rofl.commands.*;
+import me.shockpast.rofl.listeners.EntityListener;
 import me.shockpast.rofl.listeners.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,14 +12,12 @@ public final class Rofl extends JavaPlugin {
 
         //
         getServer().getPluginManager().registerEvents(new PlayerListener(this, data), this);
+        getServer().getPluginManager().registerEvents(new EntityListener(), this);
 
         //
         getCommand("vanish").setExecutor(new Vanish(this, data));
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("mute").setExecutor(new Mute(this, data));
-    }
-
-    @Override
-    public void onDisable() {
+        getCommand("report").setExecutor(new Report(data));
     }
 }
