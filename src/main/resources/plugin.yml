@@ -23,7 +23,7 @@ commands:
     permission-message: "You do not have permission to mute other players."
   report:
     description: ":)"
-    usage: "/report <player> [reason]"
+    usage: "/report <send/close> <player/id> [reason]"
     aliases: []
     permission: rofl.command.report
     permission-message: "You do not have permission to report other players."

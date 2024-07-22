@@ -119,6 +119,18 @@ public class Report implements CommandExecutor, TabExecutor {
         if (args.length == 1)
             return List.of("send", "close");
 
+        if (args.length == 2 && args[0].equals("close"))
+            return data.report_cases.keySet().stream().toList();
+
+        if (args.length == 2 && args[0].equals("send")) {
+            List<String> players = new ArrayList<>();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                players.add(player.getName());
+            }
+
+            return players;
+        };
+
         return new ArrayList<>();
     }
 }
