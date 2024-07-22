@@ -64,16 +64,11 @@ public class Mute implements CommandExecutor, TabExecutor {
         // HAHAHAHAHAAHAHAAHAHAHAHAHA
         plugin.getServer().broadcast(Component.text(player.getName())
                 .color(TextColor.color(66, 135, 245))
-                .append(Component.text(" выдал мут ")
-                        .color(TextColor.color(255, 255, 255)))
-                .append(Component.text(target.getName())
-                        .color(TextColor.color(66, 135, 245)))
-                .append(Component.text(" на ")
-                        .color(TextColor.color(255, 255, 255)))
-                .append(Component.text(args[1])
-                        .color(TextColor.color(130, 255, 115)))
-                .append(Component.text(" (%s)".formatted(reason))
-                        .color(TextColor.color(78, 78, 78))));
+                .append(Component.text(" выдал мут ").color(TextColor.color(255, 255, 255)))
+                .append(Component.text(target.getName()).color(TextColor.color(66, 135, 245)))
+                .append(Component.text(" на ").color(TextColor.color(255, 255, 255)))
+                .append(Component.text(args[1]).color(TextColor.color(130, 255, 115)))
+                .append(Component.text(" (%s)".formatted(reason)).color(TextColor.color(78, 78, 78))));
 
         plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, () ->
                 data.muted_players.remove(target.getUniqueId()), duration.getSeconds() * 20L);

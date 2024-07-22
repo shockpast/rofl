@@ -28,8 +28,7 @@ public class Vanish implements CommandExecutor {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage(Component.text("Эта команда доступна только для игроков.")
-                        .color(TextColor.color(240, 55, 55)));
+                sender.sendMessage(Component.text("Эта команда доступна только для игроков.", TextColor.color(240, 55, 55)));
 
                 return true;
             }
@@ -39,10 +38,8 @@ public class Vanish implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(Component.text(args[0])
-                        .color(TextColor.color(66, 135, 245))
-                        .append(Component.text(" не существует на сервере.")
-                                .color(TextColor.color(255, 255, 255))));
+                sender.sendMessage(Component.text(args[0], TextColor.color(66, 135, 245))
+                        .append(Component.text(" не существует на сервере.", TextColor.color(255, 255, 255))));
 
                 return true;
             }
@@ -67,12 +64,8 @@ public class Vanish implements CommandExecutor {
         else
             data.vanished_players.add(uuid);
 
-        sender.sendMessage(Component.text()
-                .content(target.getName())
-                .color(TextColor.color(66, 135, 245))
-                .append(Component.text()
-                        .content((is_vanished ? " снова видимый" : " теперь невидимый"))
-                        .color(TextColor.color(227, 227, 227))));
+        sender.sendMessage(Component.text(target.getName(), TextColor.color(66, 135, 245))
+                .append(Component.text(is_vanished ? " снова видимый" : " теперь невидимый", TextColor.color(227, 227, 227))));
 
         return true;
     }

@@ -3,6 +3,8 @@ package me.shockpast.rofl.listeners;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -51,25 +53,25 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
         if (!player.hasPermission("rofl.command.vanish"))
             return;
 
-        for (Map.Entry<UUID, Map<UUID, String>> reportEntry : data.reported_players.entrySet()) {
-            Map.Entry<UUID, String> reportData = reportEntry.getValue().entrySet().iterator().next();
+        for (Map.Entry<UUID, String> report : data.player_reports.entrySet()) {
+            Map.Entry<UUID, String> report_case = data.report_cases.get(report.getValue()).entrySet().iterator().next();
 
-            OfflinePlayer complainer = Bukkit.getOfflinePlayer(reportEntry.getKey());
-            OfflinePlayer target = Bukkit.getOfflinePlayer(reportData.getKey());
-            String reason = reportData.getValue();
+            OfflinePlayer complainer = Bukkit.getOfflinePlayer(report.getKey());
+            OfflinePlayer target = Bukkit.getOfflinePlayer(report_case.getKey());
 
-            if (complainer.getName() == null || target.getName() == null)
+            if (target.getName() == null || complainer.getName() == null)
                 continue;
 
-            Bukkit.getScheduler().runTask(plugin, () ->
-                player.sendMessage(Component.text(complainer.getName()).color(TextColor.color(66, 135, 245))
-                        .append(Component.text(" отправил жалобу на ").color(TextColor.color(255, 255, 255))
-                        .append(Component.text(target.getName()).color(TextColor.color(66, 135, 245))
-                        .append(Component.text(" (%s)".formatted(reason)).color(TextColor.color(78, 78, 78)))))));
+            player.sendMessage(Component.text(complainer.getName(), TextColor.color(66, 135, 245))
+                    .append(Component.text(" отправил жалобу на ", TextColor.color(255, 255, 255))
+                    .append(Component.text(target.getName(), TextColor.color(66, 135, 245)))
+                    .append(Component.text(" (%s)".formatted(report_case.getValue()), TextColor.color(78, 78, 78)))
+                    .append(Component.text(" [%s]".formatted(report.getValue()), TextColor.color(78, 78, 78))
+                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
         }
     }
 

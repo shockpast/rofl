@@ -6,7 +6,7 @@ commands:
   vanish:
     description: ":)"
     usage: "/vanish [player]"
-    aliases: [ cloak ]
+    aliases: [ cloak, v ]
     permission: rofl.command.vanish
     permission-message: "You do not have permission to vanish yourself or others."
   invsee:

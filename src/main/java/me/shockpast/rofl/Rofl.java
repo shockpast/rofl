@@ -3,6 +3,7 @@ package me.shockpast.rofl;
 import me.shockpast.rofl.commands.*;
 import me.shockpast.rofl.listeners.EntityListener;
 import me.shockpast.rofl.listeners.PlayerListener;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Rofl extends JavaPlugin {
@@ -19,6 +20,10 @@ public final class Rofl extends JavaPlugin {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("mute").setExecutor(new Mute(this, data));
         getCommand("report").setExecutor(new Report(data));
+
+        // Additional Permissions
+        getServer().getPluginManager().addPermission(new Permission("rofl.command.report.send"));
+        getServer().getPluginManager().addPermission(new Permission("rofl.command.report.close"));
 
         //
         this.getLogger().info("""
