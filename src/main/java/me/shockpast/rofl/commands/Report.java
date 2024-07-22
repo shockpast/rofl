@@ -1,11 +1,10 @@
 package me.shockpast.rofl.commands;
 
-import me.shockpast.rofl.Colors;
+import me.shockpast.rofl.constants.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

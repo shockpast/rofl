@@ -1,4 +1,4 @@
-package me.shockpast.rofl;
+package me.shockpast.rofl.constants;
 
 import net.kyori.adventure.text.format.TextColor;
 

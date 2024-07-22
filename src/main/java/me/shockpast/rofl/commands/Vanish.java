@@ -1,9 +1,8 @@
 package me.shockpast.rofl.commands;
 
-import me.shockpast.rofl.Colors;
+import me.shockpast.rofl.constants.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

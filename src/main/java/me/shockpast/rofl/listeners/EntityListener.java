@@ -7,8 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDismountEvent;
 
-import java.util.Objects;
-
 public class EntityListener implements Listener {
     public EntityListener() {}
 

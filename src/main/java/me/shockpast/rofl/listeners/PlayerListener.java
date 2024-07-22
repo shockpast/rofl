@@ -1,12 +1,11 @@
 package me.shockpast.rofl.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import me.shockpast.rofl.Colors;
+import me.shockpast.rofl.constants.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -108,6 +107,8 @@ public class PlayerListener implements Listener {
         BlockData blockData = block.getBlockData();
 
         if (!(blockData instanceof Stairs) && !(blockData instanceof Slab))
+            return;
+        if (blockData instanceof Slab slab && slab.getType() != Slab.Type.BOTTOM)
             return;
 
         Player player = event.getPlayer();
