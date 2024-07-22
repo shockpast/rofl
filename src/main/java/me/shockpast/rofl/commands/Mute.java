@@ -1,5 +1,6 @@
 package me.shockpast.rofl.commands;
 
+import me.shockpast.rofl.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -39,8 +40,7 @@ public class Mute implements CommandExecutor, TabExecutor {
         Player player = (Player)sender;
 
         if (target == null) {
-            sender.sendMessage(Component.text(args[0])
-                    .color(TextColor.color(66, 135, 245))
+            sender.sendMessage(Component.text(args[0], Colors.Blue)
                     .append(Component.text(" не существует на сервере.")));
 
             return true;
@@ -53,22 +53,19 @@ public class Mute implements CommandExecutor, TabExecutor {
             duration = Duration.parse("PT%s".formatted(args[1]).toUpperCase());
             reason = String.join(" ", Arrays.copyOfRange(args, 2, args.length)); // wtf is this
         } catch (DateTimeParseException exc) {
-            player.sendMessage(Component.text("Мы не смогли прочитать длительность, попробуйте ещё раз.")
-                    .color(TextColor.color(240, 55, 55)));
+            player.sendMessage(Component.text("Мы не смогли прочитать длительность, попробуйте ещё раз.", Colors.Red));
 
             return true;
         }
 
         data.muted_players.putIfAbsent(target.getUniqueId(), Instant.now().getEpochSecond() + duration.getSeconds());
 
-        // HAHAHAHAHAAHAHAAHAHAHAHAHA
-        plugin.getServer().broadcast(Component.text(player.getName())
-                .color(TextColor.color(66, 135, 245))
-                .append(Component.text(" выдал мут ").color(TextColor.color(255, 255, 255)))
-                .append(Component.text(target.getName()).color(TextColor.color(66, 135, 245)))
-                .append(Component.text(" на ").color(TextColor.color(255, 255, 255)))
-                .append(Component.text(args[1]).color(TextColor.color(130, 255, 115)))
-                .append(Component.text(" (%s)".formatted(reason)).color(TextColor.color(78, 78, 78))));
+        plugin.getServer().broadcast(Component.text(player.getName(), Colors.Blue)
+                .append(Component.text(" выдал мут ", Colors.White))
+                .append(Component.text(target.getName(), Colors.Blue))
+                .append(Component.text(" на ", Colors.White))
+                .append(Component.text(args[1], Colors.Yellow))
+                .append(Component.text(" (%s)".formatted(reason), Colors.Gray)));
 
         plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, () ->
                 data.muted_players.remove(target.getUniqueId()), duration.getSeconds() * 20L);
@@ -88,7 +85,7 @@ public class Mute implements CommandExecutor, TabExecutor {
                 yield tab;
             }
             case 2 -> Arrays.asList("1s", "1m", "1h");
-            case 3 -> Arrays.asList("Спам", "Флуд", "Плохой");
+            case 3 -> Arrays.asList("Спам", "Флуд", "Оскорбление");
             default -> new ArrayList<>();
         };
     }

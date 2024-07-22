@@ -1,5 +1,6 @@
 package me.shockpast.rofl.commands;
 
+import me.shockpast.rofl.Colors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
@@ -22,16 +23,14 @@ public class Invsee implements CommandExecutor {
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(Component.text(args[0])
-                    .color(TextColor.color(66, 135, 245))
-                    .append(Component.text(" не существует на сервере.")));
+            sender.sendMessage(Component.text(args[0], Colors.Blue)
+                    .append(Component.text(" не существует на сервере.", Colors.White)));
 
             return true;
         }
 
         TextComponent message = Component.text("Вы начали просматривать, инвентарь игрока ")
-                .append(Component.text(target.getName())
-                        .color(TextColor.color(66, 135, 245)));
+                .append(Component.text(target.getName(), Colors.Blue));
 
         player.sendMessage(message);
 

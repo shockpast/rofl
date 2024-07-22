@@ -17,9 +17,9 @@ public class EntityListener implements Listener {
         Entity player = event.getEntity();
         Entity entity = event.getDismounted();
 
-        if (entity.getType() != EntityType.ARMOR_STAND || player.getType() != EntityType.PLAYER)
+        if (entity.getType() != EntityType.ARMOR_STAND)
             return;
-        if (Objects.equals(entity.getMetadata("sit").toString(), "[]"))
+        if (entity.getMetadata("sit").isEmpty())
             return;
 
         Location location = player.getLocation();

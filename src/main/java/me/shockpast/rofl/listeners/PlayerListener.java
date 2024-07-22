@@ -1,6 +1,7 @@
 package me.shockpast.rofl.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import me.shockpast.rofl.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -65,13 +66,13 @@ public class PlayerListener implements Listener {
             if (target.getName() == null || complainer.getName() == null)
                 continue;
 
-            player.sendMessage(Component.text(complainer.getName(), TextColor.color(66, 135, 245))
-                    .append(Component.text(" отправил жалобу на ", TextColor.color(255, 255, 255))
-                    .append(Component.text(target.getName(), TextColor.color(66, 135, 245)))
-                    .append(Component.text(" (%s)".formatted(report_case.getValue()), TextColor.color(78, 78, 78)))
-                    .append(Component.text(" [%s]".formatted(report.getValue()), TextColor.color(78, 78, 78))
-                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
-                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
+            player.sendMessage(Component.text(complainer.getName(), Colors.Blue)
+                    .append(Component.text(" отправил жалобу на ", Colors.White)
+                    .append(Component.text(target.getName(), Colors.Blue))
+                    .append(Component.text(" (%s)".formatted(report_case.getValue()), Colors.Gray))
+                    .append(Component.text(" [%s]".formatted(report.getValue()), Colors.Gray)
+                        .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
         }
     }
 
@@ -87,14 +88,13 @@ public class PlayerListener implements Listener {
             return;
 
         if (Instant.now().getEpochSecond() - data.muted_players.get(uuid) <= 0) {
-            player.sendMessage(Component.text("Вы не можете писать в чат, так-как вы были заглушены.")
-                    .color(TextColor.color(240, 55, 55)));
+            player.sendMessage(Component.text("Вы не можете писать в чат, так-как вы были заглушены.", Colors.Red));
 
             event.setCancelled(true);
+            return;
         }
-        else {
-            data.muted_players.remove(uuid);
-        }
+
+        data.muted_players.remove(uuid);
     }
 
     @EventHandler

@@ -1,5 +1,6 @@
 package me.shockpast.rofl.commands;
 
+import me.shockpast.rofl.Colors;
 import me.shockpast.rofl.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -49,18 +50,18 @@ public class Report implements CommandExecutor, TabExecutor {
             data.report_cases.put(id, report);
 
             player.sendMessage(Component.text("ID жалобы: ")
-                    .append(Component.text(id, TextColor.color(66, 135, 245))
-                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
-                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id))));
+                    .append(Component.text(id, Colors.Blue)
+                        .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id))));
 
             for (Player staff : Bukkit.getOnlinePlayers()) {
                 if (!staff.hasPermission("rofl.command.vanish"))
                     continue;
 
-                staff.sendMessage(Component.text(player.getName(), TextColor.color(66, 135, 245))
-                        .append(Component.text(" отправил жалобу на ", TextColor.color(255, 255, 255))
-                        .append(Component.text(target.getName(), TextColor.color(66, 135, 245)))
-                        .append(Component.text(" (%s)".formatted(reason), TextColor.color(78, 78, 78)))));
+                staff.sendMessage(Component.text(player.getName(), Colors.Blue)
+                        .append(Component.text(" отправил жалобу на ", Colors.White)
+                        .append(Component.text(target.getName(), Colors.Blue)
+                        .append(Component.text(" (%s)".formatted(reason), Colors.Gray)))));
             }
 
             return true;
@@ -89,19 +90,19 @@ public class Report implements CommandExecutor, TabExecutor {
                 return true;
 
             if (complainer.isOnline()) {
-                complainer.sendMessage(Component.text(player.getName(), TextColor.color(66, 135, 245))
-                        .append(Component.text(" закрыл вашу жалобу на ", TextColor.color(255, 255, 255))
-                        .append(Component.text(target.getName(), TextColor.color(66, 135, 245)))
-                        .append(Component.text(" [%s]".formatted(id), TextColor.color(78, 78, 78))
-                                .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
-                                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id)))));
+                complainer.sendMessage(Component.text(player.getName(), Colors.Blue)
+                        .append(Component.text(" закрыл вашу жалобу на ", Colors.White)
+                        .append(Component.text(target.getName(), Colors.Blue))
+                        .append(Component.text(" [%s]".formatted(id), Colors.Gray)
+                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id)))));
             }
 
             player.sendMessage(Component.text("Вы успешно закрыли жалобу игрока ")
-                    .append(Component.text(complainer.getName(), TextColor.color(66, 135, 245))
-                    .append(Component.text(" на игрока ", TextColor.color(255, 255, 255))
-                    .append(Component.text(target.getName(), TextColor.color(66, 135, 245)))
-                    .append(Component.text(" [%s]".formatted(id), TextColor.color(78, 78, 78))
+                    .append(Component.text(complainer.getName(), Colors.Blue)
+                    .append(Component.text(" на игрока ", Colors.White)
+                    .append(Component.text(target.getName(), Colors.Blue))
+                    .append(Component.text(" [%s]".formatted(id), Colors.Gray)
                             .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
                             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id))))));
 
