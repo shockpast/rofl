@@ -1,35 +1,35 @@
-name: rofl
+name: RoflanUtils
 version: '1.0-SNAPSHOT'
-main: me.shockpast.rofl.Rofl
+main: me.shockpast.roflan.Roflan
 api-version: '1.21'
 commands:
   vanish:
     description: ":)"
     usage: "/vanish [player]"
     aliases: [ cloak, v ]
-    permission: rofl.command.vanish
+    permission: roflan.command.vanish
     permission-message: "You do not have permission to vanish yourself or others."
   invsee:
     description: ":)"
     usage: "/invsee <player>"
     aliases: []
-    permission: rofl.command.invsee
+    permission: roflan.command.invsee
     permission-message: "You do not have permission to view other's player inventory."
   mute:
     description: ":)"
     usage: "/mute <player> [duration] [reason]"
     aliases: []
-    permission: rofl.command.mute
+    permission: roflan.command.mute
     permission-message: "You do not have permission to mute other players."
   report:
     description: ":)"
     usage: "/report <send/close> <player/id> [reason]"
     aliases: []
-    permission: rofl.command.report
+    permission: roflan.command.report
     permission-message: "You do not have permission to report other players."
   item:
     description: ":)"
     usage: "/item <rename> <name>"
     aliases: []
-    permission: rofl.command.item
+    permission: roflan.command.item
     permission-message: "You do not have permission to use this command."

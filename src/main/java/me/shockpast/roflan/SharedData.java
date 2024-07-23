@@ -1,4 +1,4 @@
-package me.shockpast.rofl;
+package me.shockpast.roflan;
 
 import java.util.*;
 

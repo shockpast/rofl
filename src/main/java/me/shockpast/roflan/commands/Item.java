@@ -1,6 +1,6 @@
-package me.shockpast.rofl.commands;
+package me.shockpast.roflan.commands;
 
-import me.shockpast.rofl.constants.Colors;
+import me.shockpast.roflan.constants.Colors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;

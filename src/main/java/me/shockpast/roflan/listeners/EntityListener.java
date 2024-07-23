@@ -1,4 +1,4 @@
-package me.shockpast.rofl.listeners;
+package me.shockpast.roflan.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

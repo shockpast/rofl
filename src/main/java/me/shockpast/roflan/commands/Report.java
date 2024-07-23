@@ -1,7 +1,7 @@
-package me.shockpast.rofl.commands;
+package me.shockpast.roflan.commands;
 
-import me.shockpast.rofl.constants.Colors;
-import me.shockpast.rofl.SharedData;
+import me.shockpast.roflan.constants.Colors;
+import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
