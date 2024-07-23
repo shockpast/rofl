@@ -1,4 +1,6 @@
 # RoflanUtils
+[![Java CI with Gradle](https://github.com/xoderton/RoflanUtils/actions/workflows/gradle.yml/badge.svg)](https://github.com/xoderton/RoflanUtils/actions/workflows/gradle.yml)
+
 Social Plugin for Bukkit/Paper servers, that could improve player(s) experience on server.
 
 ## Legend
