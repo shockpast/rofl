@@ -27,3 +27,9 @@ commands:
     aliases: []
     permission: rofl.command.report
     permission-message: "You do not have permission to report other players."
+  item:
+    description: ":)"
+    usage: "/item <rename> <name>"
+    aliases: []
+    permission: rofl.command.item
+    permission-message: "You do not have permission to use this command."

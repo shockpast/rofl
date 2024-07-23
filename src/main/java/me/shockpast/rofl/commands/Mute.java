@@ -29,7 +29,6 @@ public class Mute implements CommandExecutor, TabExecutor {
         this.data = data;
     }
 
-    // this code is mess lol
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String line, @NotNull String[] args) {
         if (args.length < 3)

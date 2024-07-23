@@ -20,10 +20,14 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -105,7 +109,6 @@ public class PlayerListener implements Listener {
         if (block == null) return;
 
         BlockData blockData = block.getBlockData();
-
         if (!(blockData instanceof Stairs) && !(blockData instanceof Slab))
             return;
         if (blockData instanceof Slab slab && slab.getType() != Slab.Type.BOTTOM)

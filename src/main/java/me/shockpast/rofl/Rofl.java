@@ -11,7 +11,6 @@ public final class Rofl extends JavaPlugin {
     @Override
     public void onEnable() {
         SharedData data = new SharedData();
-
         Server server = getServer();
 
         //
@@ -23,6 +22,7 @@ public final class Rofl extends JavaPlugin {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("mute").setExecutor(new Mute(this, data));
         getCommand("report").setExecutor(new Report(data));
+        getCommand("item").setExecutor(new Item());
 
         // Additional Permissions
         server.getPluginManager().addPermission(new Permission("rofl.command.report.send"));

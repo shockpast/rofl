@@ -8,4 +8,5 @@ public class Colors {
     public static final TextColor White = TextColor.color(255, 255, 255);
     public static final TextColor Gray = TextColor.color(78, 78, 78);
     public static final TextColor Yellow = TextColor.color(130, 255, 115);
+    public static final TextColor Green = TextColor.color(72, 245, 66);
 }
