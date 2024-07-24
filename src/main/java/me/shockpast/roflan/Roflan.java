@@ -1,21 +1,27 @@
 package me.shockpast.roflan;
 
 import me.shockpast.roflan.commands.*;
-import me.shockpast.roflan.listeners.EntityListener;
-import me.shockpast.roflan.listeners.PlayerListener;
+import me.shockpast.roflan.listeners.*;
 import org.bukkit.Server;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Roflan extends JavaPlugin {
     @Override
     public void onEnable() {
-        SharedData data = new SharedData();
-        Server server = getServer();
+        saveResource("config.yml", false);
+        saveDefaultConfig();
 
         //
-        server.getPluginManager().registerEvents(new PlayerListener(this, data), this);
-        server.getPluginManager().registerEvents(new EntityListener(), this);
+        SharedData data = new SharedData();
+
+        Server server = getServer();
+        PluginManager pluginManager = server.getPluginManager();
+
+        //
+        pluginManager.registerEvents(new PlayerListener(this, data), this);
+        pluginManager.registerEvents(new EntityListener(this), this);
 
         //
         getCommand("vanish").setExecutor(new Vanish(this, data));
@@ -23,9 +29,10 @@ public final class Roflan extends JavaPlugin {
         getCommand("mute").setExecutor(new Mute(this, data));
         getCommand("report").setExecutor(new Report(data));
         getCommand("item").setExecutor(new Item());
+        getCommand("tweak").setExecutor(new Tweak(this));
 
         // Additional Permissions
-        server.getPluginManager().addPermission(new Permission("roflan.command.report.send"));
-        server.getPluginManager().addPermission(new Permission("roflan.command.report.close"));
+        pluginManager.addPermission(new Permission("roflan.command.report.send"));
+        pluginManager.addPermission(new Permission("roflan.command.report.close"));
     }
 }

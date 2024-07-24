@@ -2,6 +2,7 @@ name: RoflanUtils
 version: '1.0-SNAPSHOT'
 main: me.shockpast.roflan.Roflan
 api-version: '1.21'
+load: STARTUP
 commands:
   vanish:
     description: ":)"
@@ -32,4 +33,10 @@ commands:
     usage: "/item <rename> <name>"
     aliases: []
     permission: roflan.command.item
+    permission-message: "You do not have permission to use this command."
+  tweak:
+    description: ":)"
+    usage: "/tweak [tweakName] <input>"
+    aliases: []
+    permission: roflan.command.tweak
     permission-message: "You do not have permission to use this command."
