@@ -3,7 +3,6 @@ package me.shockpast.roflan.commands;
 import me.shockpast.roflan.constants.Colors;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Tweak implements CommandExecutor, TabExecutor {
+public class Tweak implements TabExecutor {
     private final JavaPlugin plugin;
 
     public Tweak(JavaPlugin plugin) {

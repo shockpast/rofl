@@ -127,9 +127,10 @@ public class PlayerListener implements Listener {
 
             switch (blockFace) {
                 case SOUTH -> location.setYaw(180);
-                case WEST -> location.setYaw(270);
-                case EAST -> location.setYaw(90);
+                case WEST ->  location.setYaw(270);
+                case EAST ->  location.setYaw(90);
                 case NORTH -> location.setYaw(0);
+                default ->    location.setYaw(0);
             }
         } else {
             location.setYaw(player.getYaw() - 180);
@@ -143,6 +144,7 @@ public class PlayerListener implements Listener {
                      Stairs.Shape.OUTER_RIGHT -> location.setYaw(location.getYaw() + 45);
                 case Stairs.Shape.INNER_LEFT,
                      Stairs.Shape.OUTER_LEFT -> location.setYaw(location.getYaw() - 45);
+                default -> location.setYaw(location.getYaw());
             }
         }
 

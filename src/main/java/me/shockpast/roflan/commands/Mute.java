@@ -5,7 +5,6 @@ import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Mute implements CommandExecutor, TabExecutor {
+public class Mute implements TabExecutor {
     private final JavaPlugin plugin;
     private final SharedData data;
 
