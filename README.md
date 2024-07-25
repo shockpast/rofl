@@ -19,3 +19,5 @@ Social Plugin for Bukkit/Paper servers, that could improve player(s) experience 
 #### `/report [send/close]`
 
 #### `/[vanish/cloak/v]`
+
+#### `/tweak`
