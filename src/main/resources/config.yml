@@ -1,2 +1,14 @@
+# fabric-carpet but made as paper plugin
 tweaks:
+  # explosions will be cancelled at last tick
+  # so it won't actually explode anything
   explosionNoBlockDamage: false
+  # water can be placed if player is in creative
+  # (in nether)
+  creativeNetherWaterPlacement: false
+  # removes any cooldown from items for players
+  # that are in creative
+  creativeNoItemCooldown: false
+  # players in creative will open containers
+  # regardless of it's block/lock state
+  creativeOpenContainerForcibly: false
