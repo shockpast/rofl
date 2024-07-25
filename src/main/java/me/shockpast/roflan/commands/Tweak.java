@@ -23,6 +23,8 @@ public class Tweak implements CommandExecutor, TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!sender.hasPermission("roflan.commands.tweak"))
+            return true;
         if (args.length < 1)
             return false;
 
@@ -50,16 +52,12 @@ public class Tweak implements CommandExecutor, TabExecutor {
         if (section.get(sub) == null)
             return false;
 
-        // this was taken from fabric-carpet, but most of other tweaks are straight out useless
-        // yes I'm looking at you cubicmetre
-        if (sub.equals("explosionNoBlockDamage"))
-            plugin.getConfig().set("tweaks.explosionNoBlockDamage", Boolean.parseBoolean(input));
+        plugin.getConfig().set("tweaks." + sub, Boolean.parseBoolean(input));
+        plugin.saveConfig();
 
         player.sendMessage(Component.text(sub, Colors.Blue)
                 .append(Component.text(" = ", Colors.White))
                 .append(Component.text(input, input.equals("true") ? Colors.Green : Colors.Red)));
-
-        plugin.saveConfig();
 
         return true;
     }
