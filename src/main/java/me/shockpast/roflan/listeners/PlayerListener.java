@@ -1,6 +1,5 @@
 package me.shockpast.roflan.listeners;
 
-import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shockpast.roflan.constants.Colors;
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
@@ -27,7 +26,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 
@@ -73,27 +71,6 @@ public class PlayerListener implements Listener {
                         .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
                         .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
         }
-    }
-
-    @EventHandler
-    public void onPlayerChat(AsyncChatEvent event) {
-        if (!event.isAsynchronous())
-            return;
-
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-
-        if (data.muted_players.get(uuid) == null)
-            return;
-
-        if (Instant.now().getEpochSecond() - data.muted_players.get(uuid) <= 0) {
-            player.sendMessage(Component.text("Вы не можете писать в чат, так-как вы были заглушены.", Colors.Red));
-
-            event.setCancelled(true);
-            return;
-        }
-
-        data.muted_players.remove(uuid);
     }
 
     @EventHandler
