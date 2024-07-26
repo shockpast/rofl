@@ -2,7 +2,6 @@ package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,15 +22,10 @@ public class Invsee implements CommandExecutor {
 
         if (target == null) {
             sender.sendMessage(Component.text(args[0], Colors.Blue)
-                    .append(Component.text(" не существует на сервере.", Colors.White)));
+                    .append(Component.text(" doesn't exist on server.", Colors.White)));
 
             return true;
         }
-
-        TextComponent message = Component.text("Вы начали просматривать, инвентарь игрока ")
-                .append(Component.text(target.getName(), Colors.Blue));
-
-        player.sendMessage(message);
 
         player.getInventory().close();
         player.openInventory(target.getInventory())

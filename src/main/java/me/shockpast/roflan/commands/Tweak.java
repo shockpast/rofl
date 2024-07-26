@@ -72,9 +72,6 @@ public class Tweak implements TabExecutor {
             return section.getKeys(true).stream().toList();
         }
 
-        if (args.length == 2)
-            return List.of("true", "false");
-
         return List.of();
     }
 }

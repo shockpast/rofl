@@ -12,3 +12,10 @@ tweaks:
   # players in creative will open containers
   # regardless of it's block/lock state
   creativeOpenContainerForcibly: false
+
+# customization for some commands
+commands:
+  item:
+    # defaults to 1, takes {n} amount of levels
+    # upon rename, set to -1 to don't take it all
+    renameCost: 1

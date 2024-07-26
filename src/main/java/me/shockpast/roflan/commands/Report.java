@@ -47,9 +47,9 @@ public class Report implements TabExecutor {
             report.put(target.getUniqueId(), reason);
             data.report_cases.put(id, report);
 
-            player.sendMessage(Component.text("ID жалобы: ")
+            player.sendMessage(Component.text("Report ID: ")
                     .append(Component.text(id, Colors.Blue)
-                        .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                        .hoverEvent(HoverEvent.showText(Component.text("Copy in Clipboard.")))
                         .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id))));
 
             for (Player staff : Bukkit.getOnlinePlayers()) {
@@ -57,7 +57,7 @@ public class Report implements TabExecutor {
                     continue;
 
                 staff.sendMessage(Component.text(player.getName(), Colors.Blue)
-                        .append(Component.text(" отправил жалобу на ", Colors.White)
+                        .append(Component.text(" sent an report ", Colors.White)
                         .append(Component.text(target.getName(), Colors.Blue)
                         .append(Component.text(" (%s)".formatted(reason), Colors.Gray)))));
             }
@@ -89,19 +89,19 @@ public class Report implements TabExecutor {
 
             if (complainer.isOnline()) {
                 complainer.sendMessage(Component.text(player.getName(), Colors.Blue)
-                        .append(Component.text(" закрыл вашу жалобу на ", Colors.White)
+                        .append(Component.text(" closed your report on ", Colors.White)
                         .append(Component.text(target.getName(), Colors.Blue))
                         .append(Component.text(" [%s]".formatted(id), Colors.Gray)
-                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                            .hoverEvent(HoverEvent.showText(Component.text("Copy to Clipboard.")))
                             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id)))));
             }
 
-            player.sendMessage(Component.text("Вы успешно закрыли жалобу игрока ")
+            player.sendMessage(Component.text("You closed report of ")
                     .append(Component.text(complainer.getName(), Colors.Blue)
-                    .append(Component.text(" на игрока ", Colors.White)
+                    .append(Component.text(" onto ", Colors.White)
                     .append(Component.text(target.getName(), Colors.Blue))
                     .append(Component.text(" [%s]".formatted(id), Colors.Gray)
-                            .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                            .hoverEvent(HoverEvent.showText(Component.text("Copy to Clipboard.")))
                             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, id))))));
 
             data.player_reports.remove(complainer.getUniqueId(), id);

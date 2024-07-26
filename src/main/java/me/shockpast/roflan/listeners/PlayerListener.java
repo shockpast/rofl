@@ -64,11 +64,11 @@ public class PlayerListener implements Listener {
                 continue;
 
             player.sendMessage(Component.text(complainer.getName(), Colors.Blue)
-                    .append(Component.text(" отправил жалобу на ", Colors.White)
+                    .append(Component.text(" sent report onto ", Colors.White)
                     .append(Component.text(target.getName(), Colors.Blue))
                     .append(Component.text(" (%s)".formatted(report_case.getValue()), Colors.Gray))
                     .append(Component.text(" [%s]".formatted(report.getValue()), Colors.Gray)
-                        .hoverEvent(HoverEvent.showText(Component.text("Тыкните, чтобы скопировать.")))
+                        .hoverEvent(HoverEvent.showText(Component.text("Copy to Clipboard.")))
                         .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
         }
     }

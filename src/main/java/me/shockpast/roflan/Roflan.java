@@ -27,7 +27,7 @@ public final class Roflan extends JavaPlugin {
         getCommand("vanish").setExecutor(new Vanish(this, data));
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("report").setExecutor(new Report(data));
-        getCommand("item").setExecutor(new Item());
+        getCommand("item").setExecutor(new Item(this));
         getCommand("tweak").setExecutor(new Tweak(this));
     }
 }

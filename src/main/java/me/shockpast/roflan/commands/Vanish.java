@@ -28,7 +28,7 @@ public class Vanish implements CommandExecutor {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage(Component.text("Эта команда доступна только для игроков.", Colors.Red));
+                sender.sendMessage(Component.text("You can't use this command as server console.", Colors.Red));
 
                 return true;
             }
@@ -39,7 +39,7 @@ public class Vanish implements CommandExecutor {
 
             if (target == null) {
                 sender.sendMessage(Component.text(args[0], Colors.Blue)
-                        .append(Component.text(" не существует на сервере.", Colors.White)));
+                        .append(Component.text(" doesn't exist on server.", Colors.White)));
 
                 return true;
             }
@@ -65,7 +65,7 @@ public class Vanish implements CommandExecutor {
             data.vanished_players.add(uuid);
 
         sender.sendMessage(Component.text(target.getName(), Colors.Blue)
-                .append(Component.text(is_vanished ? " снова видимый" : " теперь невидимый", Colors.White)));
+                .append(Component.text(is_vanished ? " is now visible" : " is now invisible", Colors.White)));
 
         return true;
     }
