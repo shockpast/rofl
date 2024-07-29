@@ -12,6 +12,9 @@ tweaks:
   # players in creative will open containers
   # regardless of it's block/lock state
   creativeOpenContainerForcibly: false
+  # simply allows to clip inside of blocks
+  # while being in creative
+  creativeNoClip: false
 
 # customization for some commands
 commands:
@@ -19,3 +22,18 @@ commands:
     # defaults to 1, takes {n} amount of levels
     # upon rename, set to -1 to don't take it all
     renameCost: 1
+
+# things are not done, or shouldn't be used
+features:
+  custom_brand:
+    enabled: false
+    delay: 0 # long (in seconds, internally <delay * 20L>)
+    period: 3 # long (in seconds, internally <delay * 20L>)
+    names: # list of strings that will appear in brand
+      - line 1
+      - line 2
+      - line 3
+  chat_modules:
+    # FROM: i'm here :loc:
+    # TO:   i'm here [10, 67, -103]
+    location: true
