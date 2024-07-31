@@ -1,13 +1,13 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
+import me.shockpast.roflan.constants.Message;
 import net.kyori.adventure.text.Component;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,16 +32,14 @@ public class Tweak implements TabExecutor {
         if (section == null)
             return true;
 
-        Player player = (Player)sender;
-
         if (args.length == 1) {
             Object value = section.get(args[0]);
             if (value == null)
                 return true;
 
-            player.sendMessage(Component.text(args[0], Colors.Blue)
-                    .append(Component.text(" = ", Colors.White))
-                    .append(Component.text(value.toString(), Boolean.parseBoolean(value.toString()) ? Colors.Green : Colors.Red)));
+            Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
+                .append(Component.text(" = ", Colors.Gray))
+                .append(Component.text(value.toString(), Boolean.parseBoolean(value.toString()) ? Colors.Green : Colors.Red)));
 
             return true;
         }
@@ -55,9 +53,9 @@ public class Tweak implements TabExecutor {
         plugin.getConfig().set("tweaks." + sub, Boolean.parseBoolean(input));
         plugin.saveConfig();
 
-        player.sendMessage(Component.text(sub, Colors.Blue)
-                .append(Component.text(" = ", Colors.White))
-                .append(Component.text(input, input.equals("true") ? Colors.Green : Colors.Red)));
+        Message.sendMessage(sender, Component.text(sub, Colors.Blue)
+            .append(Component.text(" = ", Colors.Gray))
+            .append(Component.text(input, input.equals("true") ? Colors.Green : Colors.Red)));
 
         return true;
     }

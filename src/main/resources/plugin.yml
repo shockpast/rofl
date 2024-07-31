@@ -41,3 +41,9 @@ commands:
     aliases: []
     permission: roflan.command.tweak
     permission-message: "You do not have permission to use this command."
+  fly:
+    description: ":)"
+    usage: "/fly"
+    aliases: []
+    permission: roflan.command.fly
+    permission-message: "You do not have permission to fly around."

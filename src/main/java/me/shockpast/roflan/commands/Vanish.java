@@ -1,6 +1,7 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
+import me.shockpast.roflan.constants.Message;
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -28,8 +29,7 @@ public class Vanish implements CommandExecutor {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage(Component.text("You can't use this command as server console.", Colors.Red));
-
+                Message.sendMessage(sender, Component.text("You can't use this command as server console.", Colors.Red));
                 return true;
             }
 
@@ -38,9 +38,8 @@ public class Vanish implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(Component.text(args[0], Colors.Blue)
-                        .append(Component.text(" doesn't exist on server.", Colors.White)));
-
+                Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
+                    .append(Component.text(" doesn't exist on server.", Colors.Gray)));
                 return true;
             }
         }
@@ -64,8 +63,8 @@ public class Vanish implements CommandExecutor {
         else
             data.vanished_players.add(uuid);
 
-        sender.sendMessage(Component.text(target.getName(), Colors.Blue)
-                .append(Component.text(is_vanished ? " is now visible" : " is now invisible", Colors.White)));
+        Message.sendMessage(sender, Component.text(target.getName(), Colors.Blue)
+            .append(Component.text(is_vanished ? " стал видимым" : " стал неведимым", Colors.Gray)));
 
         return true;
     }

@@ -1,6 +1,7 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
+import me.shockpast.roflan.constants.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
@@ -34,17 +35,18 @@ public class Item implements TabExecutor {
             if (item.getType() == Material.AIR)
                 return true;
 
-            if (player.getLevel() < plugin.getConfig().getInt("commands.item.renameCost")) {
-                player.sendMessage(Component.text("You don't have enough experience levels to rename this item.", Colors.Red));
+            int cost = plugin.getConfig().getInt("commands.item.renameCost");
+            if (player.getLevel() < cost) {
+                Message.sendMessage(player, Component.text("Чтобы переименовать предмет, вам требуется минимум " + cost + " уровень опыта.", Colors.Red));
                 return true;
             }
 
             meta.displayName(MiniMessage.miniMessage()
-                    .deserialize(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
+                .deserialize(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
             item.setItemMeta(meta);
 
-            player.setLevel(player.getLevel() - plugin.getConfig().getInt("commands.item.renameCost"));
-            player.sendMessage(Component.text("Item's name successfully changed.", Colors.Green));
+            player.setLevel(player.getLevel() - cost);
+            Message.sendMessage(player, Component.text("Название было успешно изменено.", Colors.Green));
 
             return true;
         }
