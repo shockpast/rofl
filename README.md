@@ -4,6 +4,10 @@ Plugin that adds commands and tweaks to your server, that might improve player's
 
 I should make an important point, that `report` command doesn't store all reports in some kind of database (sqlite, mysql) but **in-memory**, since this command was just an experiement, that might be removed from this plugin.
 
+## Download
+
+There is no such thing `Releases`, so you need to download it from [GitHub Actions](https://github.com/xoderton/RoflanUtils/actions/) or compile it by yourself.
+
 # Commands
 
 ## invsee
