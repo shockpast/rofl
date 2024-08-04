@@ -5,6 +5,7 @@ import me.shockpast.roflan.listeners.*;
 import me.shockpast.roflan.runnables.BrandRunnable;
 
 import org.bukkit.Server;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -25,6 +26,9 @@ public final class Roflan extends JavaPlugin {
     public void onEnable() {
         Roflan.instance = this;
 
+        FileConfiguration config = this.getConfig();
+        saveDefaultConfig();
+
         // Accesible Fields that are shared between files.
         protocolManager = ProtocolLibrary.getProtocolManager();
         pluginManager = getServer().getPluginManager();
@@ -33,9 +37,6 @@ public final class Roflan extends JavaPlugin {
         //
         Server server = getServer();
         BukkitScheduler scheduler = server.getScheduler();
-
-        //
-        saveDefaultConfig();
 
         //
         pluginManager.registerEvents(new ChatListener(this), this);
@@ -53,12 +54,12 @@ public final class Roflan extends JavaPlugin {
         getCommand("reply").setExecutor(new Reply(this, data));
 
         //
-        if (getConfig().getBoolean("features.custom_brand.enabled"))
+        if (config.getBoolean("features.custom_brand.enabled"))
             scheduler.runTaskTimerAsynchronously(
                 this,
                 new BrandRunnable()::run,
-                getConfig().getLong("features.custom_brand.delay") * 20L,
-                getConfig().getLong("features.custom_brand.period") * 20L
+                config.getLong("features.custom_brand.delay") * 20L,
+                config.getLong("features.custom_brand.period") * 20L
             );
     }
 }

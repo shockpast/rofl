@@ -59,11 +59,13 @@ public class ChatListener implements Listener, ChatRenderer {
         // TO:   i'm here [10, 67, -103]
         if (config.getBoolean("chat.modules.location")) {
             Location location = player.getLocation();
+
             String text = "[%d, %d, %d]".formatted((int)location.getX(), (int)location.getY(), (int)location.getZ());
+            Component tag = Component.text(text, Colors.Green);
 
             message = message.replaceText(config -> config
                 .matchLiteral(":loc:")
-                .replacement(text)
+                .replacement(tag)
                 .once());
         }
 
