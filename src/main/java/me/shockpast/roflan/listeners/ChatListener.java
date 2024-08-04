@@ -31,17 +31,11 @@ public class ChatListener implements Listener, ChatRenderer {
         if (viewer instanceof Player pViewer) {
             String textMessage = miniMessage.serialize(message);
             String textName = miniMessage.escapeTags(miniMessage.serialize(pViewer.displayName()));
+            String textMention = this.config.getString("chat.modules.mention.prefix") + textName;
 
-            String mentionText = this.config.getString("chat.modules.mention.prefix") + textName;
-
-            System.out.println(textMessage.contains(mentionText));
-            System.out.println(mentionText);
-            System.out.println(textMessage);
-            System.out.println(textName);
-
-            if (textMessage.contains(mentionText) && config.getBoolean("chat.modules.mention.enabled")) {
+            if (textMessage.contains(textMention) && config.getBoolean("chat.modules.mention.enabled")) {
                 message = message.replaceText(config -> config
-                    .matchLiteral(mentionText)
+                    .matchLiteral(textMention)
                     .replacement(text -> text.color(Colors.Yellow)));
 
                 viewer.playSound(Sound.sound(Key.key(config.getString("chat.modules.mention.sound")), Sound.Source.PLAYER, 1f, 1f));

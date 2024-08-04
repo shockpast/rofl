@@ -31,11 +31,10 @@ chat:
     # how message will be displayed for players in chat
     format: "<#554d96><name><reset> <dark_gray>»<reset> <gray><message></reset>"
   # /pm /msg /tell
-  # TODO: implement actual functionality of private messaging
   private:
     # simply format in which it will be displayed for sender and receiver of message
-    senderFormat: "<#eff542>[PM]<reset> <#554d96><sender><reset> <dark_gray>»<reset> <#554d96><receiver><reset>: <gray><message></reset>"
-    receiverFormat: "<#eff542>[PM]<reset> <#554d96><receiver><reset> <dark_gray>«<reset> <#554d96><sender><reset>: <gray><message></reset>"
+    senderFormat: "<#eff542>[PM]<reset> <#554d96><sender><reset> <dark_gray>»<reset> <#554d96><receiver><reset><dark_gray>:<reset> <gray><message></reset>"
+    receiverFormat: "<#eff542>[PM]<reset> <#554d96><sender><reset> <dark_gray>»<reset> <#554d96><receiver><reset><dark_gray>:<reset> <gray><message></reset>"
     # cooldown in seconds when people will forget about last message sender
     # used for /r /reply
     cooldown: 30
