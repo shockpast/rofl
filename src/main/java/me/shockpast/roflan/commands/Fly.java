@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.constants.Message;
+import me.shockpast.roflan.utilities.Message;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;

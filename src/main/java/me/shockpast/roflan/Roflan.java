@@ -40,16 +40,17 @@ public final class Roflan extends JavaPlugin {
         //
         pluginManager.registerEvents(new ChatListener(this), this);
         pluginManager.registerEvents(new PlayerListener(this, data), this);
-        pluginManager.registerEvents(new EntityListener(this), this);
+        pluginManager.registerEvents(new EntityListener(), this);
         pluginManager.registerEvents(new TweakListener(this), this);
 
         //
         getCommand("vanish").setExecutor(new Vanish(this, data));
         getCommand("invsee").setExecutor(new Invsee());
-        getCommand("report").setExecutor(new Report(data));
         getCommand("item").setExecutor(new Item(this));
         getCommand("tweak").setExecutor(new Tweak(this));
         getCommand("fly").setExecutor(new Fly());
+        getCommand("pm").setExecutor(new PM(this, data));
+        getCommand("reply").setExecutor(new Reply(this, data));
 
         //
         if (getConfig().getBoolean("features.custom_brand.enabled"))

@@ -1,14 +1,12 @@
 package me.shockpast.roflan.listeners;
 
-import me.shockpast.roflan.constants.Colors;
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import org.bukkit.Bukkit;
+
+import java.util.UUID;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
@@ -20,14 +18,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Map;
-import java.util.UUID;
 
 public class PlayerListener implements Listener {
     private final JavaPlugin plugin;
@@ -41,35 +35,25 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        UUID pUUID = player.getUniqueId();
 
-        if (data.vanished_players.contains(player.getUniqueId())) {
-            data.vanished_players.remove(player.getUniqueId());
+        if (data.vanished_players.contains(pUUID)) {
+            data.vanished_players.remove(pUUID);
             event.quitMessage(Component.empty());
         }
-    }
 
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        if (!player.hasPermission("rofl.command.vanish"))
-            return;
+        if (data.reply_data.containsKey(pUUID)) {
+            UUID tUUID = data.reply_data.get(pUUID);
 
-        for (Map.Entry<UUID, String> report : data.player_reports.entrySet()) {
-            Map.Entry<UUID, String> report_case = data.report_cases.get(report.getValue()).entrySet().iterator().next();
+            data.reply_data.remove(pUUID);
+            data.reply_memory.remove(pUUID);
+            data.reply_data.remove(tUUID);
+            data.reply_memory.remove(tUUID);
+        }
 
-            OfflinePlayer complainer = Bukkit.getOfflinePlayer(report.getKey());
-            OfflinePlayer target = Bukkit.getOfflinePlayer(report_case.getKey());
-
-            if (target.getName() == null || complainer.getName() == null)
-                continue;
-
-            player.sendMessage(Component.text(complainer.getName(), Colors.Blue)
-                    .append(Component.text(" sent report onto ", Colors.White)
-                    .append(Component.text(target.getName(), Colors.Blue))
-                    .append(Component.text(" (%s)".formatted(report_case.getValue()), Colors.Gray))
-                    .append(Component.text(" [%s]".formatted(report.getValue()), Colors.Gray)
-                        .hoverEvent(HoverEvent.showText(Component.text("Copy to Clipboard.")))
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, report.getValue())))));
+        if (!player.getMetadata("sit").isEmpty()) {
+            Pig pig = (Pig)player.getMetadata("sit").getFirst().value();
+            pig.remove();
         }
     }
 
@@ -125,15 +109,16 @@ public class PlayerListener implements Listener {
             }
         }
 
-        ArmorStand armorStand = location.getWorld().spawn(location, ArmorStand.class);
-        armorStand.setBasePlate(false);
-        armorStand.setArms(false);
-        armorStand.setVisible(false);
-        armorStand.setCanPickupItems(false);
-        armorStand.setGravity(false);
-        armorStand.setSmall(true);
-        armorStand.setAI(false);
-        armorStand.addPassenger(player);
-        armorStand.setMetadata("sit", new FixedMetadataValue(plugin, armorStand));
+        Pig pig = location.getWorld().spawn(location, Pig.class);
+        pig.setAI(false);
+        pig.setAgeLock(true);
+        pig.setAggressive(false);
+        pig.setInvisible(true);
+        pig.setInvulnerable(true);
+        pig.setGravity(false);
+        pig.setSilent(true);
+        pig.addPassenger(player);
+        pig.setMetadata("sit", new FixedMetadataValue(plugin, pig));
+        player.setMetadata("sit", new FixedMetadataValue(plugin, pig));
     }
 }

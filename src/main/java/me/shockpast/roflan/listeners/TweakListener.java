@@ -12,10 +12,14 @@ import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -95,5 +99,20 @@ public class TweakListener implements Listener {
 
         Chest chest = (Chest)meta.getFirst().value();
         chest.close();
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void disableBlockFading(BlockFadeEvent event) {
+        event.setCancelled(config.getBoolean("tweaks.disableBlockFading"));
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void disableWeatherChange(WeatherChangeEvent event) {
+        event.setCancelled(config.getBoolean("tweaks.disableWeatherChange"));
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void explosionNoBlockDamage(ExplosionPrimeEvent event) {
+        event.setCancelled(config.getBoolean("tweaks.explosionNoBlockDamage"));
     }
 }

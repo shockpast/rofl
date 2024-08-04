@@ -47,3 +47,15 @@ commands:
     aliases: []
     permission: roflan.command.fly
     permission-message: "You do not have permission to fly around."
+  pm:
+    description: ":)"
+    usage: "/pm <player> <message>"
+    aliases: [ msg, tell, whisper ]
+    permission: roflan.command.pm
+    permission-message: "You do not have permission to send private messages."
+  reply:
+    description: ":)"
+    usage: "/reply <message>"
+    aliases: [ r ]
+    permission: roflan.command.reply
+    permission-message: "You do not have permission to reply to private messages."

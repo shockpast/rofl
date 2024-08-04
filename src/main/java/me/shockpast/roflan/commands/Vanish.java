@@ -1,7 +1,7 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.constants.Message;
+import me.shockpast.roflan.utilities.Message;
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -29,7 +29,7 @@ public class Vanish implements CommandExecutor {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                Message.sendMessage(sender, Component.text("You can't use this command as server console.", Colors.Red));
+                Message.sendMessage(sender, Component.text("Вы не можете вызывать эту команду в консоли.", Colors.Red));
                 return true;
             }
 
@@ -39,7 +39,7 @@ public class Vanish implements CommandExecutor {
 
             if (target == null) {
                 Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
-                    .append(Component.text(" doesn't exist on server.", Colors.Gray)));
+                    .append(Component.text(" не найден на сервере.", Colors.Gray)));
                 return true;
             }
         }

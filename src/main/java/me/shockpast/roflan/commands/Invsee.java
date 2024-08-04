@@ -1,7 +1,7 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.constants.Message;
+import me.shockpast.roflan.utilities.Message;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
