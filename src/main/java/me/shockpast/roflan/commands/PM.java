@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import me.shockpast.roflan.SharedData;
 import me.shockpast.roflan.constants.Colors;
 import me.shockpast.roflan.utilities.Message;
 import net.kyori.adventure.text.Component;
@@ -20,9 +21,11 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class PM implements CommandExecutor {
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
     private final FileConfiguration config;
+    private final SharedData data;
 
-    public PM(JavaPlugin plugin) {
+    public PM(JavaPlugin plugin, SharedData data) {
         this.config = plugin.getConfig();
+        this.data = data;
     }
 
     @Override
@@ -52,6 +55,14 @@ public class PM implements CommandExecutor {
             Placeholder.parsed("receiver", target.getName()),
             Placeholder.parsed("message", message));
         Message.sendRawMessage(target, receiverFormat);
+
+        if (sender instanceof Player player) {
+            data.reply_data.put(player.getUniqueId(), target.getUniqueId());
+            data.reply_data.put(target.getUniqueId(), player.getUniqueId());
+
+            data.reply_memory.put(player.getUniqueId(), System.currentTimeMillis() + config.getLong("chat.private.cooldown") * 1000);
+            data.reply_memory.put(target.getUniqueId(), System.currentTimeMillis() + config.getLong("chat.private.cooldown") * 1000);
+        }
 
         return true;
     }

@@ -49,7 +49,8 @@ public final class Roflan extends JavaPlugin {
         getCommand("item").setExecutor(new Item(this));
         getCommand("tweak").setExecutor(new Tweak(this));
         getCommand("fly").setExecutor(new Fly());
-        getCommand("pm").setExecutor(new PM(this));
+        getCommand("pm").setExecutor(new PM(this, data));
+        getCommand("reply").setExecutor(new Reply(this, data));
 
         //
         if (getConfig().getBoolean("features.custom_brand.enabled"))

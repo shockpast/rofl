@@ -2,6 +2,9 @@ package me.shockpast.roflan.listeners;
 
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
+
+import java.util.UUID;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,10 +35,20 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        UUID pUUID = player.getUniqueId();
 
-        if (data.vanished_players.contains(player.getUniqueId())) {
-            data.vanished_players.remove(player.getUniqueId());
+        if (data.vanished_players.contains(pUUID)) {
+            data.vanished_players.remove(pUUID);
             event.quitMessage(Component.empty());
+        }
+
+        if (data.reply_data.containsKey(pUUID)) {
+            UUID tUUID = data.reply_data.get(pUUID);
+
+            data.reply_data.remove(pUUID);
+            data.reply_memory.remove(pUUID);
+            data.reply_data.remove(tUUID);
+            data.reply_memory.remove(tUUID);
         }
 
         if (!player.getMetadata("sit").isEmpty()) {
