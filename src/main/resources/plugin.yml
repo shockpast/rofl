@@ -1,60 +1,57 @@
 name: RoflanUtils
-version: '1.0-SNAPSHOT'
+description: "I had to put there something :)"
+version: "1.0.0"
 main: me.shockpast.roflan.Roflan
 api-version: '1.21'
+author: "shockpast"
 depend: [ ProtocolLib, PlaceholderAPI ]
+
 commands:
   vanish:
     description: ":)"
     usage: "/vanish [player]"
     aliases: [ cloak, v ]
-    permission: roflan.command.vanish
+    permission: roflan.admin
     permission-message: "You do not have permission to vanish yourself or others."
   invsee:
     description: ":)"
     usage: "/invsee <player>"
     aliases: []
-    permission: roflan.command.invsee
+    permission: roflan.admin
     permission-message: "You do not have permission to view other's player inventory."
-  mute:
-    description: ":)"
-    usage: "/mute <player> [duration] [reason]"
-    aliases: []
-    permission: roflan.command.mute
-    permission-message: "You do not have permission to mute other players."
-  report:
-    description: ":)"
-    usage: "/report <send/close> <player/id> [reason]"
-    aliases: []
-    permission: roflan.command.report
-    permission-message: "You do not have permission to report other players."
   item:
     description: ":)"
     usage: "/item <rename> <name>"
     aliases: []
-    permission: roflan.command.item
     permission-message: "You do not have permission to use this command."
   tweak:
     description: ":)"
     usage: "/tweak [tweakName] <input>"
     aliases: []
-    permission: roflan.command.tweak
+    permission: roflan.admin
     permission-message: "You do not have permission to use this command."
   fly:
     description: ":)"
     usage: "/fly"
     aliases: []
-    permission: roflan.command.fly
+    permission: roflan.admin
     permission-message: "You do not have permission to fly around."
   pm:
     description: ":)"
     usage: "/pm <player> <message>"
     aliases: [ msg, tell, whisper ]
-    permission: roflan.command.pm
     permission-message: "You do not have permission to send private messages."
   reply:
     description: ":)"
     usage: "/reply <message>"
     aliases: [ r ]
-    permission: roflan.command.reply
     permission-message: "You do not have permission to reply to private messages."
+
+permissions:
+  roflan.admin:
+    default: op
+    children:
+      - roflan.command.fly
+      - roflan.command.vanish
+      - roflan.command.tweak
+      - roflan.command.invsee

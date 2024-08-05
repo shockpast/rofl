@@ -48,7 +48,7 @@ public class Vanish implements CommandExecutor {
 
         Component message = is_vanished
             ? RLanguage.SUCCESS_VANISH_DISABLED.asPhrase()
-            : RLanguage.SUCCESS_FLY_ENABLED.asPhrase();
+            : RLanguage.SUCCESS_VANISH_ENABLED.asPhrase();
 
         RMessage.sendMessage(sender, message);
 

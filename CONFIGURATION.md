@@ -1,0 +1,1 @@
+eh... what should i put here... read [`config.yml`](https://github.com/xoderton/RoflanUtils/blob/main/src/main/resources/config.yml)
