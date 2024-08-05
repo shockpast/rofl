@@ -1,0 +1,46 @@
+# Цвета из "constants/Colors.java" в Hex-формате
+#
+#   Blue:     #4287f5
+#   Red:      #f03737
+#   White:    #ffffff
+#   Gray:     #aaaaaa (вы будете видеть этот цвет... очень часто...)
+#   DarkGray: #555555
+#   Yellow:   #eff542
+#   Green:    #48f542
+
+name: "Русский"
+
+notification:
+  language_changed: "Язык был изменён на Русский!"
+
+error:
+  generic:
+    console: "Вы не можете вызывать эту команду в консоли."
+    target: "<#4287f5>{0} <#f03737>не найден на сервере!"
+
+  commands:
+    pm:
+      arguments: "Вы не указали игрока или сообщение!"
+    reply:
+      unknown: "Вы никому не писали, поэтому вам некому отвечать."
+      left: "Игрок с которым вы общались вышли с сервера."
+      timeout: "Время истекло, напишите этому человеку ещё раз."
+    item:
+      rename:
+        cost: "Чтобы переименовать предмет, вам требуется минимум {0} уровень опыта."
+
+success:
+  commands:
+    vanish:
+      enabled: "<#aaaaaa>Вы теперь невидимы."
+      disabled: "<#aaaaaa>Вы теперь снова видимы."
+    fly:
+      enabled: "<#aaaaaa>Вы <#48f542>включили <#aaaaaa>полёт."
+      disabled: "<#aaaaaa>Вы <#48f542>выключили <#aaaaaa>полёт."
+    item:
+      rename: "Название было успешно изменено."
+      sign: "Предмет был успешно подписан."
+
+message:
+  item:
+    sign: "{0} <#aaaaaa>подписал этот предмет ({1} <#aaaaaa>в {2}<#aaaaaa>)"

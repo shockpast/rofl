@@ -1,7 +1,7 @@
 package me.shockpast.roflan.commands;
 
-import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import me.shockpast.roflan.SharedData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -25,46 +25,32 @@ public class Vanish implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String line, @NotNull String[] args) {
-        Player target;
-
-        if (args.length == 0) {
-            if (!(sender instanceof Player)) {
-                Message.sendMessage(sender, Component.text("Вы не можете вызывать эту команду в консоли.", Colors.Red));
-                return true;
-            }
-
-            target = (Player)sender;
-        } else {
-            target = Bukkit.getPlayer(args[0]);
-
-            if (target == null) {
-                Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
-                    .append(Component.text(" не найден на сервере.", Colors.Gray)));
-                return true;
-            }
-        }
+        Player player = (Player)sender;
 
         //
-        UUID uuid = target.getUniqueId();
-        boolean is_vanished = data.vanished_players.contains(uuid);
+        UUID pUUID = player.getUniqueId();
+        boolean is_vanished = data.vanished_players.contains(pUUID);
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.equals(target))
+        for (Player oPlayer : Bukkit.getOnlinePlayers()) {
+            if (oPlayer.equals(player))
                 continue;
 
             if (is_vanished)
-                player.showPlayer(plugin, target);
+                oPlayer.showPlayer(plugin, player);
             else
-                player.hidePlayer(plugin, target);
+                oPlayer.hidePlayer(plugin, player);
         }
 
         if (is_vanished)
-            data.vanished_players.remove(uuid);
+            data.vanished_players.remove(pUUID);
         else
-            data.vanished_players.add(uuid);
+            data.vanished_players.add(pUUID);
 
-        Message.sendMessage(sender, Component.text(target.getName(), Colors.Blue)
-            .append(Component.text(is_vanished ? " стал видимым" : " стал неведимым", Colors.Gray)));
+        Component message = is_vanished
+            ? RLanguage.SUCCESS_VANISH_DISABLED.asPhrase()
+            : RLanguage.SUCCESS_FLY_ENABLED.asPhrase();
+
+        RMessage.sendMessage(sender, message);
 
         return true;
     }

@@ -3,6 +3,7 @@ package me.shockpast.roflan;
 import me.shockpast.roflan.commands.*;
 import me.shockpast.roflan.listeners.*;
 import me.shockpast.roflan.runnables.BrandRunnable;
+import me.shockpast.roflan.utilities.RLanguage;
 
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,7 +17,8 @@ import com.comphenix.protocol.ProtocolManager;
 import lombok.Getter;
 
 public final class Roflan extends JavaPlugin {
-    @Getter private static Roflan instance;
+    @Getter
+    private static Roflan instance;
 
     public ProtocolManager protocolManager;
     public PluginManager pluginManager;
@@ -28,6 +30,8 @@ public final class Roflan extends JavaPlugin {
 
         FileConfiguration config = this.getConfig();
         saveDefaultConfig();
+
+        RLanguage.setLanguage(config.getString("main.language"));
 
         // Accesible Fields that are shared between files.
         protocolManager = ProtocolLibrary.getProtocolManager();

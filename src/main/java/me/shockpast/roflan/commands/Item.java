@@ -1,7 +1,8 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
@@ -39,7 +40,7 @@ public class Item implements TabExecutor {
 
             int cost = plugin.getConfig().getInt("commands.item.renameCost");
             if (player.getLevel() < cost) {
-                Message.sendMessage(player, Component.text("Чтобы переименовать предмет, вам требуется минимум " + cost + " уровень опыта.", Colors.Red));
+                RMessage.sendMessage(player, RLanguage.ERROR_ITEM_RENAME_COST.asPhrase(Component.text(cost)));
                 return true;
             }
 
@@ -48,7 +49,7 @@ public class Item implements TabExecutor {
             item.setItemMeta(meta);
 
             player.setLevel(player.getLevel() - cost);
-            Message.sendMessage(player, Component.text("Название было успешно изменено.", Colors.Green));
+            RMessage.sendMessage(player, RLanguage.SUCCESS_ITEM_RENAME.asPhrase().color(Colors.Green));
 
             return true;
         }
@@ -65,17 +66,16 @@ public class Item implements TabExecutor {
             String date = new SimpleDateFormat("dd/MM/yyyy").format(unix);
             String time = new SimpleDateFormat("hh:mm:ss").format(unix);
 
-            Component tag = Component.text(player.getName(), Colors.Blue)
-                .append(Component.text(" подписал этот предмет (", Colors.Gray))
-                .append(Component.text(date, Colors.Blue))
-                .append(Component.text(" в ", Colors.Gray))
-                .append(Component.text(time, Colors.Blue))
-                .append(Component.text(")", Colors.Gray));
+            Component tag = RLanguage.ITEM_SIGN_MESSAGE.asPhrase(
+                player.displayName().color(Colors.Blue),
+                Component.text(date, Colors.Blue),
+                Component.text(time, Colors.Blue)
+            );
 
             meta.lore(List.of(tag));
             item.setItemMeta(meta);
 
-            Message.sendMessage(player, Component.text("Вы успешно подписали этот предмет.", Colors.Green));
+            RMessage.sendMessage(player, RLanguage.SUCCESS_ITEM_SIGN.asPhrase().color(Colors.Green));
             return true;
         }
 

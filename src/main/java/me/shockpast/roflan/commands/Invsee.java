@@ -1,7 +1,7 @@
 package me.shockpast.roflan.commands;
 
-import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,8 +22,7 @@ public class Invsee implements CommandExecutor {
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
-                .append(Component.text(" не может быть найден.", Colors.Gray)));
+            RMessage.sendMessage(sender, RLanguage.ERROR_GENERIC_TARGET.asPhrase(Component.text(args[0])));
 
             return true;
         }

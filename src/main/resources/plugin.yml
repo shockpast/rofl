@@ -2,8 +2,7 @@ name: RoflanUtils
 version: '1.0-SNAPSHOT'
 main: me.shockpast.roflan.Roflan
 api-version: '1.21'
-depend: [ ProtocolLib ] # required only for BrandRunnable
-load: STARTUP
+depend: [ ProtocolLib, PlaceholderAPI ]
 commands:
   vanish:
     description: ":)"

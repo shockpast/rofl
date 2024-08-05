@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
@@ -23,9 +23,11 @@ public class Fly implements CommandExecutor {
         player.setAllowFlight(!canFly);
         player.playSound(sound);
 
-        Message.sendMessage(player, Component.text("Вы ", Colors.Gray)
-            .append(Component.text(!canFly ? "включили" : "выключили", !canFly ? Colors.Green : Colors.Red))
-            .append(Component.text(" полёт.", Colors.Gray)));
+        Component message = !canFly
+            ? RLanguage.SUCCESS_FLY_ENABLED.asPhrase()
+            : RLanguage.SUCCESS_FLY_DISABLED.asPhrase();
+
+        RMessage.sendMessage(player, message);
 
         return true;
     }

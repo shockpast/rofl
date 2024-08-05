@@ -1,3 +1,8 @@
+main:
+  # pull requests are happy!
+  # [ru, en_us]
+  language: en_us
+
 # fabric-carpet but made as paper plugin
 tweaks:
   # explosions will be cancelled at last tick
@@ -29,7 +34,15 @@ commands:
 chat:
   public:
     # how message will be displayed for players in chat
+    # placeholders are supported
     format: "<#554d96><name><reset> <dark_gray>»<reset> <gray><message></reset>"
+
+    # messages that will showed when player is joined and vice versa
+    join:
+      format: "<#554d96><name><reset> <#48f542>joined."
+    quit:
+      format: "<#554d96><name><reset> <#f03737>disconnected."
+
   # /pm /msg /tell
   private:
     # simply format in which it will be displayed for sender and receiver of message

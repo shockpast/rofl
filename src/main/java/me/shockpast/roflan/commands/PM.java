@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 import me.shockpast.roflan.SharedData;
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -31,13 +32,13 @@ public class PM implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length < 2) {
-            Message.sendMessage(sender, Component.text("Вы не указали игрока или сообщение!", Colors.Red));
+            RMessage.sendMessage(sender, RLanguage.ERROR_PM_ARGUMENTS.asPhrase().color(Colors.Red));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            Message.sendMessage(sender, Component.text(args[0] + " не найден на сервере!", Colors.Red));
+            RMessage.sendMessage(sender, RLanguage.ERROR_GENERIC_TARGET.asPhrase(Component.text(args[0])));
             return true;
         }
 
@@ -48,13 +49,13 @@ public class PM implements CommandExecutor {
             Placeholder.parsed("sender", senderName),
             Placeholder.parsed("receiver", target.getName()),
             Placeholder.parsed("message", message));
-        Message.sendRawMessage(sender, senderFormat);
+        RMessage.sendRawMessage(sender, senderFormat);
 
         Component receiverFormat = miniMessage.deserialize(config.getString("chat.private.receiverFormat"),
             Placeholder.parsed("sender", senderName),
             Placeholder.parsed("receiver", target.getName()),
             Placeholder.parsed("message", message));
-        Message.sendRawMessage(target, receiverFormat);
+        RMessage.sendRawMessage(target, receiverFormat);
 
         if (sender instanceof Player player) {
             data.reply_data.put(player.getUniqueId(), target.getUniqueId());

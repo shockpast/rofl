@@ -1,0 +1,46 @@
+# Colors from "constants/Colors.java" in Hexadecimal Format
+#
+#   Blue:     #4287f5
+#   Red:      #f03737
+#   White:    #ffffff
+#   Gray:     #aaaaaa (you'll see this one... a lot...)
+#   DarkGray: #555555
+#   Yellow:   #eff542
+#   Green:    #48f542
+
+name: "English"
+
+notification:
+  language_changed: "Language changed to English!"
+
+error:
+  generic:
+    console: "You can't execute this command as console."
+    target: "<#4287f5>{0} <#f03737>is not present on server!"
+
+  commands:
+    pm:
+      arguments: "You didn't provide player or message!"
+    reply:
+      unknown: "You haven't written to anyone, so you have no one to reply."
+      left: "The player you were talking to logged off the server."
+      timeout: "Time is up, write to this person again."
+    item:
+      rename:
+        cost: "To rename an item, you need a minimum of {0} experience level."
+
+success:
+  commands:
+    vanish:
+      enabled: "<#aaaaaa>You are now invisible."
+      disabled: "<#aaaaaa>You are now visible again."
+    fly:
+      enabled: "<#aaaaaa>You <#48f542>enabled <#aaaaaa>flying."
+      disabled: "<#aaaaaa>You <#48f542>disabled <#aaaaaa>flying."
+    item:
+      rename: "The name has been successfully changed."
+      sign: "The item was successfully signed."
+
+message:
+  item:
+    sign: "{0} <#aaaaaa>signed this item ({1} <#aaaaaa>at {2}<#aaaaaa>)"

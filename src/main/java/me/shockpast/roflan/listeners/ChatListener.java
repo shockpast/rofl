@@ -5,11 +5,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.shockpast.roflan.constants.Colors;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
@@ -28,6 +31,8 @@ public class ChatListener implements Listener, ChatRenderer {
 
     @Override
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+        String renderText = config.getString("chat.public.format");
+
         if (viewer instanceof Player pViewer) {
             String textMessage = miniMessage.serialize(message);
             String textName = miniMessage.escapeTags(miniMessage.serialize(pViewer.displayName()));
@@ -40,9 +45,11 @@ public class ChatListener implements Listener, ChatRenderer {
 
                 viewer.playSound(Sound.sound(Key.key(config.getString("chat.modules.mention.sound")), Sound.Source.PLAYER, 1f, 1f));
             }
+
+            renderText = PlaceholderAPI.setPlaceholders(pViewer, renderText);
         }
 
-        return miniMessage.deserialize(config.getString("chat.public.format"),
+        return miniMessage.deserialize(renderText,
             Placeholder.component("name", sourceDisplayName),
             Placeholder.component("message", message));
     }
@@ -71,5 +78,27 @@ public class ChatListener implements Listener, ChatRenderer {
 
         event.message(message);
         event.renderer(this);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        String renderText = config.getString("chat.public.join.format");
+        renderText = PlaceholderAPI.setPlaceholders(player, renderText);
+
+        event.joinMessage(miniMessage.deserialize(renderText,
+            Placeholder.component("name", player.displayName())));
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+
+        String renderText = config.getString("chat.public.quit.format");
+        renderText = PlaceholderAPI.setPlaceholders(player, renderText);
+
+        event.quitMessage(miniMessage.deserialize(renderText,
+            Placeholder.component("name", player.displayName())));
     }
 }

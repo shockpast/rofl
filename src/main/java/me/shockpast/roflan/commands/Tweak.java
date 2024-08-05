@@ -1,7 +1,7 @@
 package me.shockpast.roflan.commands;
 
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.text.Component;
 
 import org.bukkit.command.Command;
@@ -37,7 +37,7 @@ public class Tweak implements TabExecutor {
             if (value == null)
                 return true;
 
-            Message.sendMessage(sender, Component.text(args[0], Colors.Blue)
+            RMessage.sendMessage(sender, Component.text(args[0], Colors.Blue)
                 .append(Component.text(" = ", Colors.Gray))
                 .append(Component.text(value.toString(), Boolean.parseBoolean(value.toString()) ? Colors.Green : Colors.Red)));
 
@@ -53,7 +53,7 @@ public class Tweak implements TabExecutor {
         plugin.getConfig().set("tweaks." + sub, Boolean.parseBoolean(input));
         plugin.saveConfig();
 
-        Message.sendMessage(sender, Component.text(sub, Colors.Blue)
+        RMessage.sendMessage(sender, Component.text(sub, Colors.Blue)
             .append(Component.text(" = ", Colors.Gray))
             .append(Component.text(input, input.equals("true") ? Colors.Green : Colors.Red)));
 

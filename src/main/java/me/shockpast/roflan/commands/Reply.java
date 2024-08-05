@@ -14,7 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import me.shockpast.roflan.SharedData;
 import me.shockpast.roflan.constants.Colors;
-import me.shockpast.roflan.utilities.Message;
+import me.shockpast.roflan.utilities.RLanguage;
+import me.shockpast.roflan.utilities.RMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -38,18 +39,18 @@ public class Reply implements CommandExecutor {
 
         UUID tUUID = data.reply_data.get(player.getUniqueId());
         if (tUUID == null) {
-            Message.sendMessage(player, Component.text("Вы никому не писали, поэтому вам некому отвечать.", Colors.Red));
+            RMessage.sendMessage(player, RLanguage.ERROR_REPLY_NONE.asPhrase().color(Colors.Red));
             return true;
         }
 
         Player target = Bukkit.getPlayer(tUUID);
         if (target == null) {
-            Message.sendMessage(player, Component.text("Игрок с которым вы общались вышли с сервера.", Colors.Red));
+            RMessage.sendMessage(player, RLanguage.ERROR_REPLY_LEFT.asPhrase().color(Colors.Red));
             return true;
         }
 
         if (data.reply_memory.get(player.getUniqueId()) <= System.currentTimeMillis()) {
-            Message.sendMessage(player, Component.text("Время истекло, напишите этому человеку ещё раз.", Colors.Red));
+            RMessage.sendMessage(player, RLanguage.ERROR_REPLY_TIMEOUT.asPhrase().color(Colors.Red));
 
             data.reply_data.remove(tUUID);
             data.reply_data.remove(player.getUniqueId());
@@ -65,13 +66,13 @@ public class Reply implements CommandExecutor {
             Placeholder.parsed("sender", player.getName()),
             Placeholder.parsed("receiver", target.getName()),
             Placeholder.parsed("message", message));
-        Message.sendRawMessage(sender, senderFormat);
+        RMessage.sendRawMessage(sender, senderFormat);
 
         Component receiverFormat = miniMessage.deserialize(config.getString("chat.private.receiverFormat"),
             Placeholder.parsed("sender", player.getName()),
             Placeholder.parsed("receiver", target.getName()),
             Placeholder.parsed("message", message));
-        Message.sendRawMessage(target, receiverFormat);
+        RMessage.sendRawMessage(target, receiverFormat);
 
         data.reply_data.put(player.getUniqueId(), target.getUniqueId());
         data.reply_data.put(target.getUniqueId(), player.getUniqueId());

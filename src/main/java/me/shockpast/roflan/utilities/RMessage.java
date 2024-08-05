@@ -4,7 +4,7 @@ import me.shockpast.roflan.constants.Colors;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 
-public class Message {
+public class RMessage {
     public static final Component prefix = Component.text("[R] ", Colors.Yellow);
 
     /**
