@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import net.kyori.adventure.text.Component;
@@ -14,10 +13,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 
 public enum RLanguage {
-    LANGUAGE_NAME("name"),
-
-    NOTIFICATION_LANGUAGE_CHANGE("notification.language_change"),
-
     ERROR_GENERIC_CONSOLE("error.generic.console"),
     ERROR_GENERIC_TARGET("error.generic.target"),
 
@@ -72,8 +67,6 @@ public enum RLanguage {
         for (RLanguage lang : RLanguage.values()) {
             lang.translation = file.getString(lang.key, fallback.getString(lang.key, lang.translation));
         }
-
-        RMessage.sendRawMessage(Bukkit.getConsoleSender(), RLanguage.NOTIFICATION_LANGUAGE_CHANGE.asPhrase());
     }
 
     public static Component createPhrase(String key, Component... components) {

@@ -8,11 +8,6 @@
 #   Yellow:   #eff542
 #   Green:    #48f542
 
-name: "Русский"
-
-notification:
-  language_changed: "Язык был изменён на Русский!"
-
 error:
   generic:
     console: "Вы не можете вызывать эту команду в консоли."

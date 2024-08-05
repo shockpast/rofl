@@ -8,11 +8,6 @@
 #   Yellow:   #eff542
 #   Green:    #48f542
 
-name: "English"
-
-notification:
-  language_changed: "Language changed to English!"
-
 error:
   generic:
     console: "You can't execute this command as console."
