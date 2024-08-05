@@ -29,7 +29,10 @@ public enum RLanguage {
     SUCCESS_ITEM_SIGN("success.commands.item.sign"),
     SUCCESS_ITEM_RENAME("success.commands.item.rename"),
 
-    ITEM_SIGN_MESSAGE("message.item.sign");
+    ITEM_SIGN_MESSAGE("message.item.sign"),
+
+    ACTION_SAY_HELLO("action.chat.say_hello.message"),
+    ACTION_SAY_HELLO_DESC("action.chat.say_hello.description");
 
     private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 

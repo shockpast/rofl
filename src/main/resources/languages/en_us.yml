@@ -39,3 +39,9 @@ success:
 message:
   item:
     sign: "{0} <#aaaaaa>signed this item ({1} <#aaaaaa>at {2}<#aaaaaa>)"
+
+action:
+  chat:
+    say_hello:
+      message: "Hello, @{0}!" # change "@" to your own symbol that is used for mentions
+      description: "Click to say Hello."

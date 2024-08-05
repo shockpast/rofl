@@ -14,10 +14,13 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.shockpast.roflan.constants.Colors;
+import me.shockpast.roflan.utilities.RLanguage;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
@@ -76,6 +79,8 @@ public class ChatListener implements Listener, ChatRenderer {
                 .once());
         }
 
+        if (config.getBoolean("chat.modules.gentleman"))
+
         event.message(message);
         event.renderer(this);
     }
@@ -84,11 +89,15 @@ public class ChatListener implements Listener, ChatRenderer {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        ClickEvent helloClick = ClickEvent.suggestCommand(miniMessage.serialize(RLanguage.ACTION_SAY_HELLO.asPhrase(player.displayName())));
+        HoverEvent<Component> tipHover = HoverEvent.showText(RLanguage.ACTION_SAY_HELLO_DESC.asPhrase(player.displayName()));
+
         String renderText = config.getString("chat.public.join.format");
         renderText = PlaceholderAPI.setPlaceholders(player, renderText);
 
-        event.joinMessage(miniMessage.deserialize(renderText,
-            Placeholder.component("name", player.displayName())));
+        event.joinMessage(miniMessage.deserialize(renderText, Placeholder.component("name", player.displayName()))
+            .clickEvent(helloClick)
+            .hoverEvent(tipHover));
     }
 
     @EventHandler
